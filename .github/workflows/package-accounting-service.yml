@@ -18,7 +18,6 @@ jobs:
       created: ${{ steps.main.outputs.created }}
       project: ${{ steps.main.outputs.project }}
       image: ${{ steps.main.outputs.image }}
-      repository: ${{ steps.main.outputs.repository }}  
     steps:
       - id: main
         run: |
@@ -26,8 +25,6 @@ jobs:
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           echo ::set-output name=project::AccountingService
           echo ::set-output name=image::reddog-retail-accounting-service
-          echo ::set-output name=repository::briarreddogacr.azurecr.io/reddog-retail-demo
-#          echo ::set-output name=repository::${{ secrets.ACR_ENDPOINT }}/reddog-retail-demo
 
   package-service:
     name: Package Service
@@ -51,8 +48,8 @@ jobs:
           file: RedDog.${{ needs.set-env.outputs.project }}/Dockerfile
           push: true
           tags: |
-            ${{ needs.set-env.outputs.repository }}/${{ needs.set-env.outputs.image }}:latest
-            ${{ needs.set-env.outputs.repository }}/${{ needs.set-env.outputs.image }}:${{ needs.set-env.outputs.version }}
+            ${{ secrets.ACR_ENDPOINT }}/reddog-retail-demo/${{ needs.set-env.outputs.image }}:latest
+            ${{ secrets.ACR_ENDPOINT }}/reddog-retail-demo/${{ needs.set-env.outputs.image }}:${{ needs.set-env.outputs.version }}
           labels: |
             org.opencontainers.image.source=${{ github.repositoryUrl }}
             org.opencontainers.image.created=${{ needs.set-env.outputs.created }}
