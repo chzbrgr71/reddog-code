@@ -33,7 +33,7 @@ namespace RedDog.AccountingService.Controllers
         [HttpPost("orders")]
         public async Task<IActionResult> UpdateMetrics(OrderSummary orderSummary, [FromServices] AccountingContext dbContext)
         {
-            _logger.LogInformation("Received Order Summary: {@OrderSummary}", orderSummary);
+            _logger.LogInformation("Received Order Summary Brian: {@OrderSummary}", orderSummary);
 
             Customer customer = dbContext.Customers.SingleOrDefault(c => c.LoyaltyId == orderSummary.LoyaltyId);
             customer ??= new Customer()
