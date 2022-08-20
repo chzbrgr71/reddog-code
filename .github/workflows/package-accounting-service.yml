@@ -54,3 +54,17 @@ jobs:
             org.opencontainers.image.source=${{ github.repositoryUrl }}
             org.opencontainers.image.created=${{ needs.set-env.outputs.created }}
             org.opencontainers.image.revision=${{ needs.set-env.outputs.version }}
+      - name: Update deployment yaml
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          valueFile: 'manifests/deployments/accounting-service.yaml'
+          propertyPath: 'spec.template.spec.containers.0.image'
+          value: ${{ secrets.ACR_ENDPOINT }}/reddog-retail-demo/${{ needs.set-env.outputs.image }}:${{ needs.set-env.outputs.version }}
+          commitChange: 'false'
+          branch: 'master'
+          message: 'Updated accounting service deployment manifest.'
+          createPR: 'false'
+          updateFile: 'true'
+      - name: Echo yaml
+        run: |
+          cat manifests/deployments/accounting-service.yaml
