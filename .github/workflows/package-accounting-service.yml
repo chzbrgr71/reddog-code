@@ -26,7 +26,8 @@ jobs:
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           echo ::set-output name=project::AccountingService
           echo ::set-output name=image::reddog-retail-accounting-service
-          echo ::set-output name=repository::${{ secrets.ACR_ENDPOINT }}/reddog-retail-demo
+          echo ::set-output name=repository::briarreddogacr.azurecr.io/reddog-retail-demo
+#          echo ::set-output name=repository::${{ secrets.ACR_ENDPOINT }}/reddog-retail-demo
 
   package-service:
     name: Package Service
