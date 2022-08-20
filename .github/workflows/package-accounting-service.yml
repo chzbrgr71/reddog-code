@@ -1,11 +1,11 @@
-name: package-order-service
+name: package-accounting-service
 
 on:
   push:
     branches:
       - 'main'
     paths:
-      - 'RedDog.OrderService/**'
+      - 'RedDog.AccountingService/**'
 
   workflow_dispatch:
 
@@ -24,9 +24,9 @@ jobs:
         run: |
           echo ::set-output name=version::$(echo ${GITHUB_SHA} | cut -c1-7)
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-          echo ::set-output name=project::OrderService
-          echo ::set-output name=image::reddog-order-service
-          echo ::set-output name=repository::ghcr.io/azure/reddog-retail-demo
+          echo ::set-output name=project::AccountingService
+          echo ::set-output name=image::reddog-retail-accounting-service
+          echo ::set-output name=repository::${{ secrets.ACR_ENDPOINT }}/reddog-retail-demo
 
   # package-service:
   #   name: Package Service
