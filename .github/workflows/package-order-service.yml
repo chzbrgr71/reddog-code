@@ -7,6 +7,8 @@ on:
     paths:
       - 'RedDog.OrderService/**'
 
+  workflow_dispatch:
+
 jobs:
   set-env:
     name: Set Environment Variables
