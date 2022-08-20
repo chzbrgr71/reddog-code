@@ -60,8 +60,8 @@ jobs:
           valueFile: 'manifests/deployments/accounting-service.yaml'
           propertyPath: 'spec.template.spec.containers.0.image'
           value: ${{ secrets.ACR_ENDPOINT }}/reddog-retail-demo/${{ needs.set-env.outputs.image }}:${{ needs.set-env.outputs.version }}
-          commitChange: 'false'
-          branch: 'master'
+          commitChange: 'true'
+          branch: 'main'
           message: 'Updated accounting service deployment manifest.'
           createPR: 'false'
           updateFile: 'true'
